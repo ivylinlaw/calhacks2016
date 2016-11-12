@@ -1,7 +1,5 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.tag.instagramdemo.R;
-import com.tag.instagramdemo.lazyload.ImageLoader;
+import com.example.ivylinlaw.calhacks.helper.ImageLoader;
+
+import java.util.ArrayList;
 
 public class MyGridListAdapter extends BaseAdapter {
 	// private Context context;

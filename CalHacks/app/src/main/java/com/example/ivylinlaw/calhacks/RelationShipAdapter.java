@@ -1,8 +1,5 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tag.instagramdemo.R;
-import com.tag.instagramdemo.lazyload.ImageLoader;
+import com.example.ivylinlaw.calhacks.helper.ImageLoader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RelationShipAdapter extends BaseAdapter {
 

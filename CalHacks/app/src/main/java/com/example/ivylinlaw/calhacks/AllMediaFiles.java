@@ -1,11 +1,5 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -13,11 +7,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import android.util.Log;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.tag.instagramdemo.R;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class AllMediaFiles extends Activity {
 	private GridView gvAllImages;

@@ -1,7 +1,5 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.util.HashMap;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,9 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tag.instagramdemo.R;
-import com.tag.instagramdemo.example.InstagramApp.OAuthAuthenticationListener;
-import com.tag.instagramdemo.lazyload.ImageLoader;
+import com.example.ivylinlaw.calhacks.helper.ImageLoader;
+
+import java.util.HashMap;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -52,7 +50,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		mApp = new InstagramApp(this, ApplicationData.CLIENT_ID,
 				ApplicationData.CLIENT_SECRET, ApplicationData.CALLBACK_URL);
-		mApp.setListener(new OAuthAuthenticationListener() {
+		mApp.setListener(new InstagramApp.OAuthAuthenticationListener() {
 
 			@Override
 			public void onSuccess() {

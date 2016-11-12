@@ -1,11 +1,5 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,7 +10,12 @@ import android.os.Message;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.tag.instagramdemo.R;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class Relationship extends Activity {
 	private String url = "";

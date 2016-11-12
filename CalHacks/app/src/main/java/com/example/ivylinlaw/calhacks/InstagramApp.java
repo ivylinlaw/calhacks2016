@@ -1,25 +1,21 @@
 package com.example.ivylinlaw.calhacks;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import com.tag.instagramdemo.example.InstagramDialog.OAuthDialogListener;
-import com.tag.instagramdemo.lazyload.Utils;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
+import com.example.ivylinlaw.calhacks.InstagramDialog.OAuthDialogListener;
+import com.example.ivylinlaw.calhacks.helper.Utils;
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 /**
  * 
