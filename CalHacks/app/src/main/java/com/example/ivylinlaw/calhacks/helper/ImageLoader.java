@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.widget.ImageView;
+import com.example.ivylinlaw.calhacks.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,17 +36,17 @@ public class ImageLoader {
 		executorService = Executors.newFixedThreadPool(5);
 	}
 
-//	final int stub_id = R.drawable.emojis.1f4a9;
-//
+	final int stub_id = R.drawable.profile;
+
 	public void DisplayImage(String url, ImageView imageView) {
-//		imageViews.put(imageView, url);
-//		Bitmap bitmap = memoryCache.get(url);
-//		if (bitmap != null)
-//			imageView.setImageBitmap(bitmap);
-//		else {
-//			queuePhoto(url, imageView);
-//			imageView.setImageResource(stub_id);
-//		}
+		imageViews.put(imageView, url);
+		Bitmap bitmap = memoryCache.get(url);
+		if (bitmap != null)
+			imageView.setImageBitmap(bitmap);
+		else {
+			queuePhoto(url, imageView);
+			imageView.setImageResource(stub_id);
+		}
 	}
 
 	private void queuePhoto(String url, ImageView imageView) {
@@ -179,8 +180,8 @@ public class ImageLoader {
 				return;
 			if (bitmap != null)
 				photoToLoad.imageView.setImageBitmap(bitmap);
-//			else
-//				photoToLoad.imageView.setImageResource(stub_id);
+			else
+				photoToLoad.imageView.setImageResource(stub_id);
 		}
 	}
 
