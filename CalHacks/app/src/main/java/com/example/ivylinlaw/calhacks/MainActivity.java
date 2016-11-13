@@ -156,7 +156,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private void displayInfoDialogView() {
-
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 				MainActivity.this);
 		alertDialog.setTitle("Profile Info");
