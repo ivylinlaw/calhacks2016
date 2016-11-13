@@ -52,7 +52,11 @@ public class EmojiParser {
         }
         else if(max_index == FEAR)
         {
-            return  R.drawable.fear_1;
+            return  R.drawable.disgust_3;
+        }
+        else if(max_index == NEUTRAL)
+        {
+            return  R.drawable.neutral_1;
         }
         else if(max_index == HAPPINESS)
         {
@@ -60,13 +64,13 @@ public class EmojiParser {
         }
         else if(max_index == SADNESS)
         {
-            return R.drawable.sadness_1;
+            return R.drawable.sadness_4;
         }
         else if(max_index == SURPRISE)
         {
             return R.drawable.surprise_1;
         }
-        return  -1;
+        return -1;
     }
 
 }

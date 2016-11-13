@@ -101,6 +101,8 @@ public class ImageHelper {
 
             return rotateBitmap(bitmap, getImageRotationAngle(imageUri, contentResolver));
         } catch (Exception e) {
+            System.out.println("FUCKTHEEXCEPTION");
+            e.printStackTrace();
             return null;
         }
     }

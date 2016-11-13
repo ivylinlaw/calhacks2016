@@ -2,6 +2,7 @@ package com.example.ivylinlaw.calhacks;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.ivylinlaw.calhacks.helper.ImageHelper;
+import com.example.ivylinlaw.calhacks.helper.ImageLoader;
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.emotion.EmotionServiceClient;
 import com.microsoft.projectoxford.emotion.EmotionServiceRestClient;
@@ -30,13 +33,21 @@ import com.microsoft.projectoxford.face.contract.Face;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MediaFileAnalyzeActivity extends ActionBarActivity {
     // The URI of the image selected to detect.
-    private Uri mImageUri;
+    private URL mImageUri;
+
+    private String url_String;
 
     // The image selected to detect.
     private Bitmap mBitmap;
@@ -49,13 +60,30 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Bundle extras = getIntent().getExtras();
-//        String mUri = extras.getString("URI");
+        url_String = getIntent().getStringExtra("URI");
+        try {
+            mBitmap = new doMap(url_String).execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.d("DEBUG3", String.valueOf(mBitmap.getHeight()));
         setContentView(R.layout.activity_media_file_analyze);
         if (client == null) {
             client = new EmotionServiceRestClient(getString(R.string.subscription_key));
         }
         mEditText = (EditText) findViewById(R.id.editTextResult);
+        System.out.println("DEBUG2::"+mImageUri);
+        //Log.d("DEBUG2", String.valueOf(mBitmap.getHeight()));
+        if (mBitmap != null) {
+            // Show the image on screen.
+            ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+            imageView.setImageBitmap(mBitmap);
+            // Add detection log.
+            Log.d("RecognizeActivity", "Image: " + mImageUri + " resized to " + mBitmap.getWidth() + "x" + mBitmap.getHeight());
+            doRecognize();
+        }
     }
 
     public void doRecognize() {
@@ -81,16 +109,6 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mImageUri = Uri.parse(data.getExtras().getString("URI"));
-        mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(mImageUri, getContentResolver());
-            if (mBitmap != null) {
-                // Show the image on screen.
-                ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                imageView.setImageBitmap(mBitmap);
-                // Add detection log.
-                Log.d("RecognizeActivity", "Image: " + mImageUri + " resized to " + mBitmap.getWidth() + "x" + mBitmap.getHeight());
-                doRecognize();
-            }
     }
 
     private List<RecognizeResult> processWithAutoFaceDetection() throws EmotionServiceException, IOException {
@@ -225,10 +243,10 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
                     paint.setColor(Color.RED);
 
                     // set up draw for emoji(s)
-                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                    BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-                    Bitmap bitmap = drawable.getBitmap();
-                    Canvas canvas = new Canvas(bitmap);
+//                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+//                    BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+//                    Bitmap bitmap = drawable.getBitmap();
+////                    Canvas canvas = new Canvas(bitmap);
 
                     for (RecognizeResult r : result) {
                         mEditText.append(String.format("\nFace #%1$d \n", count));
@@ -241,29 +259,69 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
                         mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
                         mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
                         mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
-                        faceCanvas.drawRect(r.faceRectangle.left,
-                                    r.faceRectangle.top,
-                                    r.faceRectangle.left + r.faceRectangle.width,
-                                    r.faceRectangle.top + r.faceRectangle.height,
-                                    paint);
+//                        faceCanvas.drawRect(r.faceRectangle.left,
+//                                    r.faceRectangle.top,
+//                                    r.faceRectangle.left + r.faceRectangle.width,
+//                                    r.faceRectangle.top + r.faceRectangle.height,
+//                                    paint);
 
                             // draw emoji(s) on imageView
 //                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
                         // draw emoji(s) on imageView
                         int getEmoji = EmojiParser.getEmojibyScore(r.scores);
-
+                        Log.d("Emoji #", getEmoji + "");
                         Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), getEmoji);
 //                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
                         Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
                         poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
-                        canvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
+                        faceCanvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
                         count++;
                     }
-//                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
+                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+                    imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmapCopy));
                 }
                 mEditText.setSelection(0);
             }
+        }
+    }
+
+    private class doMap extends AsyncTask<String, String, Bitmap>{
+        private Exception exception;
+        private final String url_string;
+
+        public doMap(String url_String){
+            this.url_string = url_String;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... args) {
+            Bitmap bitmap= null;
+            URL url = null;
+            try {
+                url = new URL(url_string);
+                Log.d("DEBUG3", url_String);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                InputStream input = null;
+                connection.connect();
+                input = connection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(input);
+                mImageUri = url;
+                Log.d("DEBUG3", "DOGETTHEURLANDMAP");
+            } catch (MalformedURLException e) {
+                this.exception = e;
+                exception.printStackTrace();
+            } catch (IOException e) {
+                this.exception = e;
+                exception.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+//            mBitmap = bitmap;
+//            Log.d("DEBUG3", String.valueOf(mBitmap.getHeight()));
         }
     }
 }

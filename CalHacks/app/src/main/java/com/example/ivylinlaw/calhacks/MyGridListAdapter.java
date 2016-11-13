@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import static android.R.attr.key;
 
 public class MyGridListAdapter extends BaseAdapter {
-	// private Context context;
+	private Context context;
 	private ArrayList<String> imageThumbList;
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader;
 
 	public MyGridListAdapter(Context context, ArrayList<String> imageThumbList) {
+		this.context = context;
 		inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.imageThumbList = imageThumbList;
@@ -56,10 +57,10 @@ public class MyGridListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Log.d("MyGridListAdapter ", "holder.ivPhoto clicked @"+pos);
-				Intent mIntent = new Intent();
+				Intent mIntent = new Intent(context, MediaFileAnalyzeActivity.class);
 				mIntent.putExtra("URI", imageThumbList.get(pos));
-				MediaFileAnalyzeActivity MFAA = new MediaFileAnalyzeActivity();
-				MFAA.startActivity(mIntent);
+				Log.d("DEBUG1", imageThumbList.get(pos));
+				context.startActivity(mIntent);
 			}
 		});
 
