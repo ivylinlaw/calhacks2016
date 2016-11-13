@@ -93,63 +93,66 @@ public class AllMediaFiles extends Activity {
 
 	private void setImageGridAdapter() {
 		gvAllImages.setAdapter(new MyGridListAdapter(context,imageThumbList));
-//		gvAllImages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View v,
-//									int position, long id) {
-//				String faceSubscriptionKey = getString(R.string.faceSubscription_key);
-//				if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
-//					Log.d("no face subscription key", "There is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles");
-//				} else {
-//					// Do emotion detection using face rectangles provided by Face API.
-//					try {
-//						if(recognizedResults==null){
-//							System.out.println("what the fuck");
-//						}
-//					} catch (Exception e) {
-//						Log.d("exception", "Error encountered. Exception is: " + e.toString());
-//					}
-//				}
-////				for(int i = 0 ; i<recognizedResults.size();i++) {
-//					List<RecognizeResult> resultss = recognizedResults.get(position);
-//					Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-//					paint.setStyle(Paint.Style.STROKE);
-//					paint.setStrokeWidth(5);
-//					paint.setColor(Color.RED);
-//					// set up draw for emoji(s)
-//					ImageView imageView = (ImageView) v;
-//					BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
-//					Bitmap bitmap = drawable.getBitmap();
-//					Canvas canvas = new Canvas(bitmap);
-//
-//					for (RecognizeResult r : resultss) {
-////					mEditText.append(String.format("\nFace #%1$d \n", count));
-////					mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
-////					mEditText.append(String.format("\t contempt: %1$.5f\n", r.scores.contempt));
-////					mEditText.append(String.format("\t disgust: %1$.5f\n", r.scores.disgust));
-////					mEditText.append(String.format("\t fear: %1$.5f\n", r.scores.fear));
-////					mEditText.append(String.format("\t happiness: %1$.5f\n", r.scores.happiness));
-////					mEditText.append(String.format("\t neutral: %1$.5f\n", r.scores.neutral));
-////					mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
-////					mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
-////					mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
-////					faceCanvas.drawRect(r.faceRectangle.left,
-////							r.faceRectangle.top,
-////							r.faceRectangle.left + r.faceRectangle.width,
-////							r.faceRectangle.top + r.faceRectangle.height,
-////							paint);
-//						// draw emoji(s) on imageView
-//						Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
-////                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
-//						Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
-//						poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
-//						canvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
-//					}
-//				}
-//
-//
-////			}
-//		});
+		gvAllImages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View v,
+									int position, long id) {
+				String faceSubscriptionKey = getString(R.string.faceSubscription_key);
+				if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
+					Log.d("no face subscription key", "There is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles");
+				} else {
+					// Do emotion detection using face rectangles provided by Face API.
+					try {
+						if(recognizedResults==null){
+							System.out.println("what the fuck");
+						}
+					} catch (Exception e) {
+						Log.d("exception", "Error encountered. Exception is: " + e.toString());
+					}
+				}
+//				for(int i = 0 ; i<recognizedResults.size();i++) {
+					List<RecognizeResult> resultss = recognizedResults.get(position);
+					Log.d("resultss: ", String.valueOf(resultss.size()));
+					Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+					paint.setStyle(Paint.Style.STROKE);
+					paint.setStrokeWidth(5);
+					paint.setColor(Color.RED);
+					// set up draw for emoji(s)
+					ImageView imageView = (ImageView) v;
+					BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+					Bitmap bitmap = drawable.getBitmap();
+					Canvas canvas = new Canvas(bitmap);
+
+					for (RecognizeResult r : resultss) {
+						System.out.println("YES!!!"+resultss.size());
+//					mEditText.append(String.format("\nFace #%1$d \n", count));
+//					mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
+//					mEditText.append(String.format("\t contempt: %1$.5f\n", r.scores.contempt));
+//					mEditText.append(String.format("\t disgust: %1$.5f\n", r.scores.disgust));
+//					mEditText.append(String.format("\t fear: %1$.5f\n", r.scores.fear));
+//					mEditText.append(String.format("\t happiness: %1$.5f\n", r.scores.happiness));
+//					mEditText.append(String.format("\t neutral: %1$.5f\n", r.scores.neutral));
+//					mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
+//					mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
+//					mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
+//					faceCanvas.drawRect(r.faceRectangle.left,
+//							r.faceRectangle.top,
+//							r.faceRectangle.left + r.faceRectangle.width,
+//							r.faceRectangle.top + r.faceRectangle.height,
+//							paint);
+						// draw emoji(s) on imageView
+						Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
+//                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
+						Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
+						poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
+						canvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
+						imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
+					}
+				}
+
+
+//			}
+		});
 	}
 
 	private void getAllMediaImages() {
@@ -199,8 +202,6 @@ public class AllMediaFiles extends Activity {
 
 					System.out.println("jsonObject::" + jsonObject);
 					new yijianfenxi(imageThumbList).execute();
-//					System.out.println("DEBUG4: "+recognizedResults.size());
-
 				} catch (Exception exception) {
 					exception.printStackTrace();
 					what = WHAT_ERROR;
@@ -308,6 +309,7 @@ public class AllMediaFiles extends Activity {
 				try {
 					List<RecognizeResult> resultList = processWithAutoFaceDetection(uriList.get(i));
 					result.add(resultList);
+					System.out.println("RESULTSIZE "+result.size());
 				} catch (EmotionServiceException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
@@ -316,7 +318,7 @@ public class AllMediaFiles extends Activity {
 					e1.printStackTrace();
 				}
 			}
-			return null;
+			return result;
 		}
 
 
