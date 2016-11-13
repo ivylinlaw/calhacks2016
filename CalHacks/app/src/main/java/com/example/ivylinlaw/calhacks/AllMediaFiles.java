@@ -195,7 +195,7 @@ public class AllMediaFiles extends Activity {
 								.getJSONObject(TAG_IMAGES);
 
 						JSONObject thumbnail_obj = images_obj
-								.getJSONObject(TAG_THUMBNAIL);
+								.getJSONObject("standard_resolution");
 
 						// String str_height =
 						// thumbnail_obj.getString(TAG_HEIGHT);

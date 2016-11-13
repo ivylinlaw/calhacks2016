@@ -273,8 +273,8 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
                         Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), getEmoji);
 //                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
                         Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
-                        poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
-                        faceCanvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
+                        poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width * 3/2, r.faceRectangle.height * 3/2, true);
+                        faceCanvas.drawBitmap(poopBitmap, r.faceRectangle.left - r.faceRectangle.width/4, r.faceRectangle.top - r.faceRectangle.height/3, paint);
                         count++;
                     }
                     ImageView imageView = (ImageView) findViewById(R.id.selectedImage);

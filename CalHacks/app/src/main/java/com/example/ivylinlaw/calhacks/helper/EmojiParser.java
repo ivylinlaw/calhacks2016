@@ -40,7 +40,7 @@ public class EmojiParser {
         }
         if(max_index == ANGER)
         {
-            return R.drawable.anger_1;
+            return R.drawable.anger_2;
         }
         else if(max_index == CONTEMPT)
         {
