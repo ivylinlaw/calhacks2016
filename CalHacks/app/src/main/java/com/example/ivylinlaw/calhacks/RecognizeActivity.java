@@ -263,7 +263,7 @@ public class RecognizeActivity extends ActionBarActivity {
         return result;
     }
 
-    private class doRequest extends AsyncTask<String, String, List<RecognizeResult>> {
+    protected class doRequest extends AsyncTask<String, String, List<RecognizeResult>> {
         // Store error message
         private Exception e = null;
         private boolean useFaceRectangles = false;

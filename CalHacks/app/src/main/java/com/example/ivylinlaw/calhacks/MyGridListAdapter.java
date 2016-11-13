@@ -1,6 +1,8 @@
 package com.example.ivylinlaw.calhacks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.ImageView;
 import com.example.ivylinlaw.calhacks.helper.ImageLoader;
 
 import java.util.ArrayList;
+
+import static android.R.attr.key;
 
 public class MyGridListAdapter extends BaseAdapter {
 	// private Context context;
@@ -52,7 +56,10 @@ public class MyGridListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				Log.d("MyGridListAdapter ", "holder.ivPhoto clicked @"+pos);
-				//
+				Intent mIntent = new Intent();
+				mIntent.putExtra("URI", imageThumbList.get(pos));
+				MediaFileAnalyzeActivity MFAA = new MediaFileAnalyzeActivity();
+				MFAA.startActivity(mIntent);
 			}
 		});
 
