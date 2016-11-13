@@ -31,7 +31,7 @@ public class MyGridListAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return position;
+		return imageThumbList.get(position);
 	}
 
 	@Override
