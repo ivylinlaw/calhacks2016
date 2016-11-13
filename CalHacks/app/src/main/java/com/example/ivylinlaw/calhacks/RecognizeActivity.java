@@ -38,9 +38,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -315,6 +317,12 @@ public class RecognizeActivity extends ActionBarActivity {
                     paint.setStrokeWidth(5);
                     paint.setColor(Color.RED);
 
+                    // set up draw for emoji(s)
+                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+                    BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+                    Bitmap bitmap = drawable.getBitmap();
+                    Canvas canvas = new Canvas(bitmap);
+
                     for (RecognizeResult r : result) {
                         mEditText.append(String.format("\nFace #%1$d \n", count));
                         mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
@@ -331,10 +339,18 @@ public class RecognizeActivity extends ActionBarActivity {
                                 r.faceRectangle.left + r.faceRectangle.width,
                                 r.faceRectangle.top + r.faceRectangle.height,
                                 paint);
+
+                        // draw emoji(s) on imageView
+                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
+//                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
+                        Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
+                        poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
+                        canvas.drawBitmap(poopBitmap, r.faceRectangle.left, r.faceRectangle.top, paint);
+
                         count++;
                     }
-                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), mBitmap));
+//                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
+                    imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
                 }
                 mEditText.setSelection(0);
             }
