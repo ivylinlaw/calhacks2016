@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.microsoft.projectoxford.emotion.EmotionServiceClient;
 import com.microsoft.projectoxford.emotion.EmotionServiceRestClient;
 import com.microsoft.projectoxford.emotion.contract.FaceRectangle;
+import com.example.ivylinlaw.calhacks.helper.EmojiParser;
 import com.microsoft.projectoxford.emotion.contract.RecognizeResult;
 import com.microsoft.projectoxford.emotion.rest.EmotionServiceException;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
@@ -247,7 +248,11 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
                                     paint);
 
                             // draw emoji(s) on imageView
-                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
+//                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
+                        // draw emoji(s) on imageView
+                        int getEmoji = EmojiParser.getEmojibyScore(r.scores);
+
+                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), getEmoji);
 //                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
                         Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
                         poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
