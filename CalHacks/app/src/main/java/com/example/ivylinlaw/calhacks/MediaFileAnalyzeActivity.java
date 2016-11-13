@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 
+import com.example.ivylinlaw.calhacks.helper.EmojiParser;
 import com.microsoft.projectoxford.emotion.contract.RecognizeResult;
 
 import java.util.ArrayList;
@@ -108,7 +109,9 @@ public class MediaFileAnalyzeActivity extends ActionBarActivity {
                                 paint);
 
                         // draw emoji(s) on imageView
-                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), R.drawable.profile);
+                        int getEmoji = EmojiParser.getEmojibyScore(r.scores);
+
+                        Drawable myDrawable = ContextCompat.getDrawable(getBaseContext(), getEmoji);
 //                        Drawable myDrawable = getResources().getDrawable(R.drawable.profile);
                         Bitmap poopBitmap = ((BitmapDrawable) myDrawable).getBitmap();
                         poopBitmap = Bitmap.createScaledBitmap(poopBitmap, r.faceRectangle.width, r.faceRectangle.height, true);
