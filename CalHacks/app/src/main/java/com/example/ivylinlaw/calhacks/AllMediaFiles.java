@@ -58,7 +58,9 @@ public class AllMediaFiles extends Activity {
 	}
 
 	private void setImageGridAdapter() {
-		gvAllImages.setAdapter(new MyGridListAdapter(context,imageThumbList));
+		MyGridListAdapter mListAdapter = new MyGridListAdapter(context,imageThumbList);
+
+		gvAllImages.setAdapter(mListAdapter);
 	}
 
 	private void getAllMediaImages() {

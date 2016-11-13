@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ivylinlaw.calhacks">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,11 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".RecognizeActivity"
             android:label="@string/title_activity_analyze"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -28,12 +30,9 @@
             android:name=".helper.SelectImageActivity"
             android:label="@string/select_an_image"
             android:screenOrientation="portrait" />
-        <activity android:name=".AllMediaFiles"></activity>
-        <activity android:name=".Relationship"></activity>
+        <activity android:name=".AllMediaFiles" />
+        <activity android:name=".Relationship" />
+        <activity android:name=".MediaFileAnalyzeActivity"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
 </manifest>

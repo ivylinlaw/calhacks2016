@@ -1,6 +1,7 @@
 package com.example.ivylinlaw.calhacks;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,16 @@ public class MyGridListAdapter extends BaseAdapter {
 		Holder holder = new Holder();
 		holder.ivPhoto = (ImageView) view.findViewById(R.id.ivImage);
 		imageLoader.DisplayImage(imageThumbList.get(position), holder.ivPhoto);
+
+		final int pos = position;
+		holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Log.d("MyGridListAdapter ", "holder.ivPhoto clicked @"+pos);
+				//
+			}
+		});
+
 		return view;
 	}
 
